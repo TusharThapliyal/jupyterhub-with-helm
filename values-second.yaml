@@ -1,0 +1,26 @@
+# myjupyterhub.com is an example domain name.
+hub:
+  config:
+    authenticator_class: oauthenticator.generic.GenericOAuthenticator
+  extraConfig:
+    myConfig: |
+      c.GenericOAuthenticator.authorize_url = 'https://myjupyterhub.auth.ap-south-1.amazoncognito.com/oauth2/authorize'
+      c.GenericOAuthenticator.token_url = 'https://myjupyterhub.auth.ap-south-1.amazoncognito.com/oauth2/token'
+      c.GenericOAuthenticator.userdata_url = 'https://myjupyterhub.auth.ap-south-1.amazoncognito.com/oauth2/userInfo'
+      c.GenericOAuthenticator.userdata_token_method = 'POST'
+      c.GenericOAuthenticator.username_claim = 'username' 
+      c.GenericOAuthenticator.client_id = '<your client id>'
+      c.GenericOAuthenticator.client_secret = '<your client secret>' 
+      c.GenericOAuthenticator.oauth_callback_url = 'https://myjupyterhub.com/hub/oauth_callback'  
+      c.Authenticator.allow_all = True
+
+proxy:
+  secretToken: "<generate a secret token>"  
+  service:
+    type: NodePort
+    nodePorts:
+      http: 30080 
+      https: 30443  
+  https:
+    enabled: true  
+
